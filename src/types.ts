@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const planRequestSchema = z.object({
+export const DietPlanRequestSchema = z.object({
     name: z.string().min(2),
     age: z.number().positive(),
     height_cm: z.number().positive(),
@@ -10,4 +10,4 @@ export const planRequestSchema = z.object({
     objective: z.enum(["perder_peso", "hipertrofia", "manter_massa"]),
 });
 
-export type DietPlanRequest = z.infer<typeof planRequestSchema>;
+export type DietPlanRequest = z.infer<typeof DietPlanRequestSchema>;

@@ -37,5 +37,5 @@ export function buildUserPrompt(input: DietPlanRequest){
 }
 
 export function buildDocsSystemPrompt(docs: string){
-
+    return `Documento técnico para ajudar na geração de dietas: ${docs}`;
 }
