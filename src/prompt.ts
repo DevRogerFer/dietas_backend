@@ -7,7 +7,7 @@
 
 import type { DietPlanRequest } from "./types";
 
-export function buildSystemPrompt(){
+export function buildSystemPrompt() {
   return [
     `Você é Nutri-AI, um agente de nutrição que cria planos semanais de dietas.
     Regras fixas:
@@ -23,19 +23,19 @@ export function buildSystemPrompt(){
   ].join("\n");
 }
 
-export function buildUserPrompt(input: DietPlanRequest){
+export function buildUserPrompt(input: DietPlanRequest) {
   return [
     "Gere um plano alimentar personalizado com base nos dados:",
-    `- Nome: ${input.name}`,
-    `- Idade: ${input.age}`,
-    `- Altura em cm: ${input.height_cm}`,
-    `- Peso em kg: ${input.weight_kg}`,
-    `- Sexo: ${input.sex}`,
-    `- Nivel de atividade: ${input.activity_level}`,
-    `- Objetivo: ${input.objective}`,
+    `- Nome: ${input.nome}`,
+    `- Idade: ${input.idade}`,
+    `- Altura em cm: ${input.altura_cm}`,
+    `- Peso em kg: ${input.peso_kg}`,
+    `- Sexo: ${input.sexo}`,
+    `- Nivel de atividade: ${input.nivel_atividade}`,
+    `- Objetivo: ${input.objetivo}`,
   ].join("\n");
 }
 
-export function buildDocsSystemPrompt(docs: string){
-    return `Documento técnico para ajudar na geração de dietas: ${docs}`;
+export function buildDocsSystemPrompt(docs: string) {
+  return `Documento técnico para ajudar na geração de dietas: ${docs}`;
 }
