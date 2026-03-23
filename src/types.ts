@@ -6,8 +6,15 @@ export const DietPlanRequestSchema = z.object({
   altura_cm: z.number().positive(),
   peso_kg: z.number().positive(),
   sexo: z.enum(["masculino", "feminino"]),
-  nivel_atividade: z.enum(["sedentario", "2x_semana", "4x_semana"]),
-  objetivo: z.enum(["perder_peso", "hipertrofia", "manter_massa"]),
+  nivel_atividade: z.enum([
+    "sedentario",
+    "2x_semana",
+    "3x_semana",
+    "4x_semana",
+    "5x_semana",
+    "diario",
+  ]),
+  objetivo: z.enum(["perda_de_peso", "hipertrofia", "manter_massa_muscular"]),
 });
 
 export type DietPlanRequest = z.infer<typeof DietPlanRequestSchema>;
