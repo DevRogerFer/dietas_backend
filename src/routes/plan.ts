@@ -2,6 +2,17 @@ import { generateDietPlan } from "../agent";
 import { DietPlanRequestSchema } from "../types";
 import type { FastifyInstance } from "fastify";
 
+const defaultAllowedOrigins = [
+  "http://localhost:3000",
+  "https://app-dietas.rogerfer.dev",
+];
+
+const allowedOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean)
+  : defaultAllowedOrigins;
+
 export async function planRoutes(app: FastifyInstance) {
   app.post("/plan", async (request, reply) => {
     const parse = DietPlanRequestSchema.safeParse(request.body);
@@ -13,7 +24,11 @@ export async function planRoutes(app: FastifyInstance) {
     }
 
     reply.hijack();
-    reply.raw.setHeader("Access-Control-Allow-Origin", "*");
+    const requestOrigin = request.headers.origin;
+    if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+      reply.raw.setHeader("Access-Control-Allow-Origin", requestOrigin);
+      reply.raw.setHeader("Vary", "Origin");
+    }
     reply.raw.setHeader("Content-Type", "text/event-stream");
     reply.raw.setHeader("Cache-Control", "no-cache");
     reply.raw.setHeader("Connection", "keep-alive");
