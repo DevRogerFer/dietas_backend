@@ -45,9 +45,11 @@ Crie um arquivo `.env` na raiz do backend:
 ```env
 OPENAI_API_KEY=sua_chave_aqui
 PORT=3333
+CORS_ORIGINS=http://localhost:3000,https://seu-frontend.exemplo.com
 ```
 
 > `PORT` é opcional. Se não for informado, a API usa `3333`.
+> `CORS_ORIGINS` define as origens permitidas separadas por vírgula.
 
 ## Executar em desenvolvimento
 
@@ -56,6 +58,18 @@ npm run dev
 ```
 
 Servidor padrão: `http://localhost:3333`
+
+## Executar em produção
+
+```bash
+npm run start
+```
+
+## Scripts
+
+- `npm run dev`: inicia ambiente de desenvolvimento com watch
+- `npm run build`: compila TypeScript para `dist`
+- `npm run start`: inicia API em modo produção
 
 ## Endpoints
 
@@ -78,7 +92,7 @@ Headers de resposta:
 - `Content-Type: text/event-stream`
 - `Cache-Control: no-cache`
 - `Connection: keep-alive`
-- `Access-Control-Allow-Origin: *`
+- `Access-Control-Allow-Origin`: retorna somente para origens permitidas em `CORS_ORIGINS`
 
 #### Payload esperado
 
